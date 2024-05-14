@@ -9,30 +9,23 @@
                 display: flow-root;
                 margin: 0;
                 box-sizing: border-box;
-                width: 1920px;
-                height: 1080px;
             }
 
             .test {
-                position: relative;
                 top: 0;
                 left: 0;
                 bottom: 0;
                 right: 0;
-                display: flex;
+                display: table;
                 justify-content: center;
-            }
-
-            div {
-                width: 50%;
-                margin: 0;
-                border: 0;
-                padding: 0;
             }
 
             img {
                 width: 100%;
-                display: block;
+                margin: 0;
+                border: 0;
+                padding: 0;
+                display: table-cell;
             }
         </style>
         
@@ -40,19 +33,36 @@
 
     <body class="test">
         <script>
-            
-            const newDiv = document.createElement("div");
 
-            for (let i = 1; i < 44; i++) {
-                
-                const newImg = document.createElement("img");
-                const imgName = "000" + String(i) + ".jpg";
-                newImg.setAttribute('src', imgName.substr(imgName.length - 8, imgName.length));
-                newDiv.appendChild(newImg);
+            function myFun () {
+                const maxWidth = document.documentElement.clientWidth;
 
+                for (let i = 1; i < 44; i++) {
+                    
+                    const newImg = document.createElement("img");
+                    const imgName = "000" + String(i) + ".jpg";
+
+                    if (maxWidth > 600) {
+                        newImg.setAttribute('style', "width: 600px; padding-left: " + (maxWidth - 600) / 2 + "px;");
+                    } else {
+                        newImg.setAttribute('style', "width: 100%;");
+                    }
+
+                    newImg.setAttribute('src', imgName.substr(imgName.length - 8, imgName.length));
+                    document.body.appendChild(newImg);
+
+                }
             }
 
-            document.body.appendChild(newDiv);
+            function reLoad () {
+                var images = document.getElementsByTagName('img');
+                while(images.length > 0) {
+                    images[0].parentNode.removeChild(images[0]);
+                }
+                myFun();
+            }
+            myFun();
+            window.addEventListener('resize', reLoad);
 
         </script>
     </body>
