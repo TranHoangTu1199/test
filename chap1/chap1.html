@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title> Thác Vị Thời Không - 错位时空 >> Abyssal > chap 1 </title>
+        <meta charset="utf-8">
+        <style>
+            html, body{
+                display: flow-root;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            .test {
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                display: table;
+                justify-content: center;
+            }
+
+            img {     
+                margin: 0;
+                border: 0;
+                padding: 0;
+                display: table-cell;
+            }
+        </style>
+        
+    </head>
+
+    <body class="test">
+        <script>
+
+            const autoWidth = 800
+
+            function myFun () {
+                let maxWidth = document.documentElement.clientWidth;
+
+                for (let i = 1; i < 47; i++) {
+                    
+                    let newImg = document.createElement("img");
+                    let imgName = `000${i}.jpg`;
+
+                    if (maxWidth > autoWidth) {
+                        newImg.setAttribute('style', `width: ${autoWidth}px; padding-left: ${(maxWidth - autoWidth) / 2}px;`);
+                    } else {
+                        newImg.setAttribute('style', "width: 100%;");
+                    }
+
+                    newImg.setAttribute('src', imgName.substr(imgName.length - 8, imgName.length));
+                    document.body.appendChild(newImg);
+
+                }
+            }
+
+            function reLoad () {
+                let images = document.getElementsByTagName('img');
+                while (images.length > 0) {
+                    images[0].parentNode.removeChild(images[0]);
+                }
+                myFun();
+            }
+
+            myFun();
+            window.addEventListener('resize', reLoad);
+
+        </script>
+    </body>
+</html>
